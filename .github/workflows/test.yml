@@ -48,3 +48,4 @@ jobs:
           fail-on-alert: false
           fail-threshold: "200%"
           alert-comment-cc-users: "@ne-bknn"
+          auto-push: true
