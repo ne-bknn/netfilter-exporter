@@ -184,7 +184,7 @@ func (b IPTablesBackend) GetRules() ([]backend.Rule, error) {
 }
 
 func (IPTablesBackend) GetName() string {
-    return "iptables"
+	return "iptables"
 }
 
 var _ backend.FirewallBackend = IPTablesBackend{}

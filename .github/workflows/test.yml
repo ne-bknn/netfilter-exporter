@@ -33,7 +33,7 @@ jobs:
 
       - name: run benchmark
         run: |
-          go test -bench=. -benchmem | tee output.txt
+          go test -bench=. -benchmem -run=^$ ./... | tee output.txt
 
       - name: store benchmark result
         uses: benchmark-action/github-action-benchmark@v1

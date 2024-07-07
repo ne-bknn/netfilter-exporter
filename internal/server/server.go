@@ -8,7 +8,7 @@ import (
 )
 
 type FirewallExporter struct {
-	backend       backend.FirewallBackend
+	backend      backend.FirewallBackend
 	collectError prometheus.Gauge
 }
 
@@ -25,7 +25,7 @@ func NewFirewallExporter(backend backend.FirewallBackend) *FirewallExporter {
 }
 
 func (e *FirewallExporter) Describe(ch chan<- *prometheus.Desc) {
-    // e.collectError.Describe(ch)
+	// e.collectError.Describe(ch)
 }
 
 func (e *FirewallExporter) Collect(ch chan<- prometheus.Metric) {
@@ -60,5 +60,5 @@ func (e *FirewallExporter) Collect(ch chan<- prometheus.Metric) {
 		)
 	}
 
-    e.collectError.Collect(ch)
+	e.collectError.Collect(ch)
 }
