@@ -27,6 +27,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      # use https://github.com/grafana/alloy/blob/main/.github/workflows/fuzz-go.yml
       - name: run fuzzing
         run: |
           go test -fuzz=. -fuzztime=30s
