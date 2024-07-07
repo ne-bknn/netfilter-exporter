@@ -1,7 +1,7 @@
 ---
 name: test
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
   pull_request:
 
@@ -26,3 +26,24 @@ jobs:
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: run fuzzing
+        run: |
+          go test -fuzz=. -fuzztime=30s
+
+      - name: run benchmark
+        run: |
+          go test -bench=. -benchmem | tee output.txt
+
+      - name: store benchmark result
+        uses: benchmark-action/github-action-benchmark@v1
+        with:
+          name: go benchmark
+          tool: "go"
+          output-file-path: output.txt
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          alert-threshold: "130%"
+          comment-on-alert: true
+          fail-on-alert: false
+          fail-threshold: "200%"
+          alert-comment-cc-users: "@ne-bknn"

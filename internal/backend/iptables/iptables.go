@@ -182,3 +182,9 @@ func (b IPTablesBackend) GetRules() ([]backend.Rule, error) {
 
 	return rules, nil
 }
+
+func (IPTablesBackend) GetName() string {
+    return "iptables"
+}
+
+var _ backend.FirewallBackend = IPTablesBackend{}

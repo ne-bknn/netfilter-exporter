@@ -22,13 +22,15 @@ func ParseRuleAnnotation(input string) map[string]string {
     for _, pair := range pairs {
         kv := strings.SplitN(pair, "=", 2)
         if len(kv) != 2 {
-            return nil
+            // TODO: log parsing error
+            continue
         }
 
         key, value := kv[0], kv[1]
 
         if !validKeyValue.MatchString(key) || !validKeyValue.MatchString(value) {
-            return nil
+            // TODO: log parsing error
+            continue
         }
 
         result[key] = value

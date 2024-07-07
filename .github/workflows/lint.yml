@@ -1,7 +1,7 @@
 ---
 name: lint
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
   pull_request:
 
@@ -18,6 +18,10 @@ jobs:
           go-version: "1.22"
           cache-dependency-path: |
             go.sum
+
+      - name: Ensure all files were formatted as per gofmt
+        run: |
+          [ "$(gofmt -l $(find . -name '*.go') 2>&1)" = "" ]
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v6
