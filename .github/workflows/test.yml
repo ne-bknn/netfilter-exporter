@@ -5,6 +5,10 @@ on: # yamllint disable-line rule:truthy
   push:
   pull_request:
 
+permissions:
+  deployments: write
+  contents: write
+
 jobs:
   lint:
     name: Test
