@@ -104,7 +104,7 @@ func getIPTablesXML() (io.Reader, error) {
 			fmt.Printf("error running iptables-save: %v\n", err)
 			return
 		}
-		w.Write(output)
+		_ = w.Write(output)
 	}()
 
 	return output, nil

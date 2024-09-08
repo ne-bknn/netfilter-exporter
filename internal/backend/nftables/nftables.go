@@ -141,7 +141,6 @@ func (NFTablesBackend) GetName() string {
 }
 
 func (b NFTablesBackend) GetRules() ([]backend.Rule, error) {
-	t.Skip()
 	output, err := b.readNftablesJSON()
 	if err != nil {
 		return nil, err
