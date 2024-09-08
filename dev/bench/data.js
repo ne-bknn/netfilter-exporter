@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1725810223442,
+  "lastUpdate": 1725811646759,
   "repoUrl": "https://github.com/ne-bknn/netfilter-exporter",
   "entries": {
     "go benchmark": [
@@ -168,6 +168,102 @@ window.BENCHMARK_DATA = {
             "value": 140,
             "unit": "allocs/op",
             "extra": "24429 times\n4 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "36561672+ne-bknn@users.noreply.github.com",
+            "name": "Timofey Bakunin",
+            "username": "ne-bknn"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0a5da53041bc1701351558601ca38f9e7ca73e07",
+          "message": "Update README.md",
+          "timestamp": "2024-09-08T19:06:17+03:00",
+          "tree_id": "b0b200f5762e1ed1df2d8474044d1a7fa7d7729d",
+          "url": "https://github.com/ne-bknn/netfilter-exporter/commit/0a5da53041bc1701351558601ca38f9e7ca73e07"
+        },
+        "date": 1725811646497,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "BenchmarkParseRuleAnnotation",
+            "value": 4779,
+            "unit": "ns/op\t    3320 B/op\t      49 allocs/op",
+            "extra": "241422 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseRuleAnnotation - ns/op",
+            "value": 4779,
+            "unit": "ns/op",
+            "extra": "241422 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseRuleAnnotation - B/op",
+            "value": 3320,
+            "unit": "B/op",
+            "extra": "241422 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseRuleAnnotation - allocs/op",
+            "value": 49,
+            "unit": "allocs/op",
+            "extra": "241422 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseIPTablesXML",
+            "value": 275504,
+            "unit": "ns/op\t   68961 B/op\t    1839 allocs/op",
+            "extra": "4233 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseIPTablesXML - ns/op",
+            "value": 275504,
+            "unit": "ns/op",
+            "extra": "4233 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseIPTablesXML - B/op",
+            "value": 68961,
+            "unit": "B/op",
+            "extra": "4233 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseIPTablesXML - allocs/op",
+            "value": 1839,
+            "unit": "allocs/op",
+            "extra": "4233 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseNftablesJSON",
+            "value": 48723,
+            "unit": "ns/op\t   11576 B/op\t     140 allocs/op",
+            "extra": "24753 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseNftablesJSON - ns/op",
+            "value": 48723,
+            "unit": "ns/op",
+            "extra": "24753 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseNftablesJSON - B/op",
+            "value": 11576,
+            "unit": "B/op",
+            "extra": "24753 times\n4 procs"
+          },
+          {
+            "name": "BenchmarkParseNftablesJSON - allocs/op",
+            "value": 140,
+            "unit": "allocs/op",
+            "extra": "24753 times\n4 procs"
           }
         ]
       }
