@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"os/exec"
+
+	"github.com/ne-bknn/netfilter-exporter/internal/backend"
 )
 
 type Nftables struct {
@@ -94,7 +96,7 @@ type Counter struct {
 type Accept struct{}
 
 func readNftablesJSON() (io.Reader, error) {
-	cmd := exec.Command("nft", "list", "ruleset", "-j")
+	cmd := exec.Command("nft", "-j", "list", "ruleset")
 	output, err := cmd.StdoutPipe()
 	if err != nil {
 		return nil, fmt.Errorf("error getting stdout pipe: %w", err)
@@ -109,24 +111,71 @@ func readNftablesJSON() (io.Reader, error) {
 
 func parseNftablesJSON(r io.Reader) (*Nftables, error) {
 	var nftables Nftables
+	/*
+		buf := new(bytes.Buffer)
+		buf.ReadFrom(r)
+		content := buf.String()
+		fmt.Printf(content)
+	*/
+
 	if err := json.NewDecoder(r).Decode(&nftables); err != nil {
 		return nil, fmt.Errorf("error decoding JSON: %w", err)
 	}
 	return &nftables, nil
 }
 
-func main() {
-	output, err := readNftablesJSON()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	nftables, err := parseNftablesJSON(output)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	fmt.Println(nftables)
+type NFTablesBackend struct {
+	readNftablesJSON  func() (io.Reader, error)
+	parseNftablesJSON func(r io.Reader) (*Nftables, error)
 }
+
+func NewNFTablesBackend(
+	readNftablesJSON func() (io.Reader, error),
+	parseNftablesJSON func(r io.Reader) (*Nftables, error),
+) *NFTablesBackend {
+	return &NFTablesBackend{readNftablesJSON, parseNftablesJSON}
+}
+
+func (NFTablesBackend) GetName() string {
+	return "nftables"
+}
+
+func (b NFTablesBackend) GetRules() ([]backend.Rule, error) {
+	t.Skip()
+	output, err := b.readNftablesJSON()
+	if err != nil {
+		return nil, err
+	}
+
+	nftables, err := b.parseNftablesJSON(output)
+	if err != nil {
+		return nil, err
+	}
+
+	rules := []backend.Rule{}
+	for _, nftRule := range nftables.Nftables {
+		if nftRule.Rule != nil {
+			var packetCount, byteCount uint64
+			for _, expr := range nftRule.Rule.Expr {
+				if expr.Counter != nil {
+					packetCount = uint64(expr.Counter.Packets)
+					byteCount = uint64(expr.Counter.Bytes)
+				}
+			}
+			rules = append(rules, backend.Rule{
+				Tags:        map[string]string{"comment": nftRule.Rule.Comment},
+				Chain:       nftRule.Rule.Chain,
+				Table:       nftRule.Rule.Table,
+				PacketCount: packetCount,
+				ByteCount:   byteCount,
+			})
+		}
+	}
+	return rules, nil
+}
+
+func MakeNFTablesBackend() *NFTablesBackend {
+	return NewNFTablesBackend(readNftablesJSON, parseNftablesJSON)
+}
+
+var _ backend.FirewallBackend = NFTablesBackend{}

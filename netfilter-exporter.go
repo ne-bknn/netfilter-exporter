@@ -1,18 +1,33 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
+	"github.com/ne-bknn/netfilter-exporter/internal/backend"
 	"github.com/ne-bknn/netfilter-exporter/internal/backend/iptables"
+	"github.com/ne-bknn/netfilter-exporter/internal/backend/nftables"
+	"github.com/ne-bknn/netfilter-exporter/internal/config"
+	"github.com/ne-bknn/netfilter-exporter/internal/logs"
 	"github.com/ne-bknn/netfilter-exporter/internal/server"
 )
 
 func main() {
+	logger := logs.GetLogger()
+	config, err := config.GetConfig(logger)
+	if err != nil {
+		return
+	}
 	// Create your firewall backend instance
-	firewallBackend := iptables.MakeIPTablesBackend() // Replace with your actual backend
+	var firewallBackend backend.FirewallBackend
+	if config.Engine == "iptables" {
+		firewallBackend = iptables.MakeIPTablesBackend()
+	} else {
+		firewallBackend = nftables.MakeNFTablesBackend()
+	}
 
 	// Create a new FirewallExporter
 	exporter := server.NewFirewallExporter(firewallBackend)
@@ -22,5 +37,7 @@ func main() {
 
 	// Expose the metrics endpoint
 	http.Handle("/metrics", promhttp.Handler())
-	http.ListenAndServe(":9090", nil)
+	if err := http.ListenAndServe(":9090", nil); err != nil {
+		log.Fatalf("Error starting HTTP server: %v", err)
+	}
 }
