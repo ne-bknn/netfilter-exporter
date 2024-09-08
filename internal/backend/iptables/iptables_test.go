@@ -13,6 +13,8 @@ import (
 var EnableSystemTests = flag.Bool("run_system_tests", false, "Run tests that operate against the live kernel")
 
 func AmIRoot(t *testing.T) bool {
+	t.Helper()
+
 	u, err := user.Current()
 	if err != nil {
 		t.Fatalf("Failed to get current user: %v", err)

@@ -78,7 +78,11 @@ func GetConfig(logger *slog.Logger) (*Config, error) {
 	v.SetEnvPrefix("NF_EXPORTER")
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
-	v.BindPFlags(pflag.CommandLine)
+	err := v.BindPFlags(pflag.CommandLine)
+	if err != nil {
+		logger.Error("Error binding flags to config", slog.String("error", err.Error()))
+		return nil, err
+	}
 
 	var config Config
 	if err := v.Unmarshal(&config); err != nil {

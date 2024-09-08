@@ -59,4 +59,3 @@ jobs:
           fail-threshold: "200%"
           alert-comment-cc-users: "@ne-bknn"
           auto-push: true
-          external-data-json-path: ./cache/benchmark-data.json
