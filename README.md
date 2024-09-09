@@ -1,10 +1,10 @@
-
 # netfilter-exporter
 
 Export iptabels/nftables statistics as prometheus metrics. Inspired by [Scaling Kubernetes to 7,500 nodes](https://openai.com/index/scaling-kubernetes-to-7500-nodes/).
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
-[![Build Status](https://github.com/ne-bknn/exporter-merger/actions/workflows/build.yml/badge.svg)]()
+[![Build Status](https://github.com/ne-bknn/exporter-merger/actions/workflows/build.yml/badge.svg)][![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fne-bknn%2Fnetfilter-exporter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fne-bknn%2Fnetfilter-exporter?ref=badge_shield)
+()
 [![codecov](https://codecov.io/gh/ne-bknn/netfilter-exporter/branch/master/graph/badge.svg?token=A85S07L6P5)](https://codecov.io/gh/ne-bknn/netfilter-exporter)
 [![Continious Benchmarking](https://img.shields.io/badge/Continious%20Benchmarking-515151)](https://ne-bknn.github.io/netfilter-exporter/dev/bench/)
 
@@ -49,3 +49,7 @@ Please read [prometheus metric and label naming best practices](https://promethe
 - [ ] nftables support
 - [ ] Docker images
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fne-bknn%2Fnetfilter-exporter.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fne-bknn%2Fnetfilter-exporter?ref=badge_large)
