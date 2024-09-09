@@ -5,7 +5,7 @@ Export iptabels/nftables statistics as prometheus metrics. Inspired by [Scaling 
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![Build Status](https://github.com/ne-bknn/exporter-merger/actions/workflows/build.yml/badge.svg)]()
-[![codecov](https://codecov.io/gh/ne-bknn/netfilter-exporter/branch/master/graph/badge.svg?token=A85S07L6P5)](https://codecov.io/gh/ne-bknn/exporter-merger)
+[![codecov](https://codecov.io/gh/ne-bknn/netfilter-exporter/branch/master/graph/badge.svg?token=A85S07L6P5)](https://codecov.io/gh/ne-bknn/netfilter-exporter)
 [![Continious Benchmarking](https://img.shields.io/badge/Continious%20Benchmarking-515151)](https://ne-bknn.github.io/netfilter-exporter/dev/bench/)
 
 ## Deployment
